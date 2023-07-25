@@ -6,21 +6,22 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
+    if(!localStorage.getItem("accessToken")){
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/oauth/token', {
-        
+      const response = await axios.post('http://localhost:3000/oauth/token', {    
         email: email,
         password: password,
         grant_type: 'password'
       });
       console.log(response.data)
       const accessToken = response.data.access_token;
-      // Store the access token in localStorage or state management system
       localStorage.setItem('accessToken', accessToken);
-      // or use state management (e.g., Redux) to handle the access token
     } catch (error) {
       console.error('Login error:', error);
+    }}
+    else{
+      alert("Logout to continue!");
     }
   };
   const handleClick = () => {

@@ -11,8 +11,19 @@ const Navigation = () => {
           <Link to="/show">Show All products</Link>
         </li>
         <li>
+          <Link to="/owner">Your Products</Link>
+        </li>
+        <li>
+          <Link to="/applications">Your Applications</Link>
+        </li>
+        <li>
+          <Link to="/addproduct">Add Product</Link>
+        </li>
+        <li>
           <Link to="/login">Login</Link>
         </li>
+        
+        
       </ul>
     </nav>
   );
