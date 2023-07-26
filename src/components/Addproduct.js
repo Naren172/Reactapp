@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axiosInstance from './axiosInstance';
+import { Button, Form,FormGroup,Input,Label} from 'reactstrap';
 const ProductForm = () => {
   const [productData, setProductData] = useState({
     name: '',
@@ -10,14 +11,13 @@ const ProductForm = () => {
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
-
-    // Handle file input separately
     if (type === 'file') {
       setProductData((prevData) => ({ ...prevData, [name]: e.target.files[0] }));
     } else {
       setProductData((prevData) => ({ ...prevData, [name]: value }));
     }
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,25 +40,34 @@ const ProductForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Name:</label>
-        <input type="text" name="name" value={productData.name} onChange={handleChange} />
-      </div>
-      <div>
-        <label htmlFor="description">Description:</label>
-        <textarea name="description" value={productData.description} onChange={handleChange} />
-      </div>
-      <div>
-        <label htmlFor="rent">Rent:</label>
-        <input type="number" name="rent" value={productData.price} onChange={handleChange} />
-      </div>
-      <div>
-        <label htmlFor="image">Image:</label>
-        <input type="file" name="image" onChange={handleChange} />
-      </div>
-      <button type="submit">Add Product</button>
-    </form>
+    
+    <div className="App">
+    <h2>Add Product</h2>
+    <Form className="form" onSubmit={handleSubmit}>
+      <FormGroup>
+        <Label for="name">Name</Label>
+        <Input type="text" name="name" id="name" value={productData.name} onChange={handleChange} placeholder="example@example.com"/>
+      </FormGroup>
+      <br/>
+      <FormGroup>
+        <Label for="rent">Rent</Label>
+        <Input type="text" name="rent" id="rent" value={productData.price} onChange={handleChange}/>
+      </FormGroup>
+      <br/>
+      <FormGroup>
+        <Label for="description">Description</Label>
+        <textarea name="description" id="description" value={productData.description} onChange={handleChange}/>
+      </FormGroup>
+      <br/>
+      <FormGroup>
+        <Label for="image">Image</Label>
+        <Input type="file" name="image" id="image" onChange={handleChange}/>
+      </FormGroup> <br/>
+     <Button type="submit" className="form-submit">Add Product</Button>
+  </Form>
+</div>
+
+
   );
 };
 
